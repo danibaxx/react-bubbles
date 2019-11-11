@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axiosWithAuth from '../utilities/axiosWithAuth';
 
 const Login = (props) => {
   // make a post request to retrieve a token from the api
@@ -19,8 +19,8 @@ const Login = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    axios
-      .post('http://localhost:5000/api/login', data)
+    axiosWithAuth()
+      .post('/login', data)
       .then(result => {
         localStorage.setItem('payload', result.data.payload)
         props.history.push('/bubblepage')
