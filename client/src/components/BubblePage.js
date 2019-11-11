@@ -13,7 +13,7 @@ const BubblePage = (props) => {
       .get('/colors')
       .then(result => {
         setColorList(result.data)
-        console.log('COLORS', result)
+        // console.log('COLORS', result)
       })
       .catch(error => {
         console.log('COLOR ERROR', error)
