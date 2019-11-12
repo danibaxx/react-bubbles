@@ -8,7 +8,7 @@ const initialColor = {
 
 const ColorList = ({ colors, updateColors }) => {
   console.log('COLORLIST', colors);
-  console.log('UPDATELIST', updateColors);
+  // console.log('UPDATELIST', updateColors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -23,14 +23,14 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is it saved right now?
     axiosWithAuth()
-      .put(`/colors/${colors.id}`, initialColor)
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then(result => {
         // result.history.push('/bubblepage')
         // result.history.push({updateColors})
-        // console.log('PUT', result)
+        console.log('Color was saved!')
       })
       .catch(error => {
-        console.log('SAVE/EDIT ERROR', error.result)
+        console.log('SAVE/EDIT ERROR', error)
       })
   };
 
