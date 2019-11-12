@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosWithAuth from '../utilities/axiosWithAuth';
 
 const initialColor = {
   color: "",
@@ -7,7 +7,8 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  console.log('COLORLIST', colors);
+  // console.log('UPDATELIST', updateColors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -20,11 +21,29 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
-    // where is is saved right now?
+    // where is it saved right now?
+    axiosWithAuth()
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      .then(result => {
+        // result.history.push('/bubblepage')
+        // result.history.push({updateColors})
+        console.log('Color was saved!')
+      })
+      .catch(error => {
+        console.log('SAVE/EDIT ERROR', error)
+      })
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`/colors/${color.id}`)
+      .then(result => {
+        console.log('Color was deleted!')
+      })
+      .catch(error => {
+        console.log('DELETE COLOR ERROR', error)
+      })
   };
 
   return (
